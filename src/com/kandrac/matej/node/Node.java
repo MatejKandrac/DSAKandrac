@@ -1,18 +1,47 @@
-package com.kandrac.matej;
 
+/*
+ * Copyright (c) Matej Kandráč
+ * Created: 2022.2.27
+ */
+
+package com.kandrac.matej.node;
+
+/**
+ * <h1>Basic Node class.</h1>
+ * Contains basic values common for every type of Node.
+ */
 public class Node {
 
+    /**
+     * Left and right nodes
+     */
     private Node left;
     private Node right;
+
+    /**
+     * Height and balance factor. Values are calculated automatically when balancing
+     */
     private int height = 0;
     private int balanceFactor = 0;
+
+    /**
+     * Value node contains
+     */
     private final int value;
 
+    /**
+     * Basic constructor
+     * @param value Value node contains
+     */
     public Node(int value) {
         this.value = value;
     }
 
-    Node rotateRight() {
+    /**
+     * Tree right rotation method.
+     * @return new root Node
+     */
+    public Node rotateRight() {
         Node oldLeft = left;
         left = oldLeft.right;
         oldLeft.setRight(this);
@@ -23,7 +52,11 @@ public class Node {
         return oldLeft;
     }
 
-    Node rotateLeft() {
+    /**
+     * Tree left rotation.
+     * @return new root Node
+     */
+    public Node rotateLeft() {
         Node oldRight = right;
         right = oldRight.left;
         oldRight.setLeft(this);
@@ -34,7 +67,10 @@ public class Node {
         return oldRight;
     }
 
-    void update() {
+    /**
+     * Update method calculates height and balance factor of Node.
+     */
+    public void update() {
         // Update values
         int leftValue = left == null ? -1 : left.height;
         int rightValue = right == null ? -1 : right.height;

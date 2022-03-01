@@ -14,28 +14,28 @@ import com.kandrac.matej.node.Node;
  * See also {@link AVLTree} {@link RedBlackTree}
  */
 
-public abstract class BinaryTree {
+public abstract class BinaryTree<T extends Node> {
 
     /**
      * Root of the tree
      */
-    protected Node root;
+    protected T root;
 
     /**
      * Recursive method for inserting. Method is different for various types of trees.
-     * Don't use this method from outside class. Use {@link #insert(Node)} instead.
+     * Don't use this method from outside class. Use {@link #insert(T)} instead.
      * @param node Node to be inserted (value is always same)
      * @param root Root node (value changes depending on height)
      * @return new root node
      */
-    protected abstract Node insertRecursive(Node node, Node root);
+    protected abstract T insertRecursive(T node, T root);
 
     /**
      * Balance method different for each tree.
      * @param node node which will be balanced
      * @return new root node after balance
      */
-    abstract Node balance(Node node);
+    abstract T balance(T node);
 
     /**
      * Delete method different for each tree
@@ -44,10 +44,10 @@ public abstract class BinaryTree {
     abstract void delete(int value);
 
     /**
-     * Public insert method. Launches recursive insertion if root is not null. See {@link #insertRecursive(Node, Node)}
+     * Public insert method. Launches recursive insertion if root is not null. See {@link #insertRecursive(T, T)}
      * @param node Node to be inserted
      */
-    public void insert(Node node) {
+    public void insert(T node) {
         if (root == null) {
             root = node;
             return;

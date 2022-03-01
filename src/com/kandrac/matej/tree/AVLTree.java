@@ -6,19 +6,19 @@
 
 package com.kandrac.matej.tree;
 
-import com.kandrac.matej.node.Node;
+import com.kandrac.matej.node.AVLNode;
 
-public class AVLTree extends BinaryTree {
+public class AVLTree extends BinaryTree<AVLNode> {
 
-    protected Node insertRecursive(Node node, Node root) {
+    protected AVLNode insertRecursive(AVLNode node, AVLNode root) {
         if (node.getValue() < root.getValue()) {
             if (root.getLeft() != null)
-                root.setLeft(insertRecursive(node, root.getLeft()));
+                root.setLeft(insertRecursive(node, ((AVLNode) root.getLeft())));
             else
                 root.setLeft(node);
         } else {
             if (root.getRight() != null)
-                root.setRight(insertRecursive(node, root.getRight()));
+                root.setRight(insertRecursive(node, ((AVLNode) root.getRight())));
             else
                 root.setRight(node);
         }
@@ -32,15 +32,14 @@ public class AVLTree extends BinaryTree {
     }
 
     @Override
-    Node balance(Node node) {
+    AVLNode balance(AVLNode node) {
         if (root.getBF() == -2) {
-            if (root.getLeft().getBF() > 0)
-                root.setLeft(root.getLeft().rotateLeft());
-
+            if (((AVLNode) root.getLeft()).getBF() > 0)
+                root.setLeft(((AVLNode) root.getLeft()).rotateLeft());
             return root.rotateRight();
         } else if (root.getBF() == 2) {
-            if (root.getRight().getBF() < 0)
-                root.setRight(root.getRight().rotateRight());
+            if (((AVLNode) root.getRight()).getBF() < 0)
+                root.setRight(((AVLNode) root.getRight()).rotateRight());
 
             return root.rotateLeft();
         }

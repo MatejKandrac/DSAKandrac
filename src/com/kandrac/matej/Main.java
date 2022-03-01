@@ -6,6 +6,7 @@
 
 package com.kandrac.matej;
 
+import com.kandrac.matej.node.AVLNode;
 import com.kandrac.matej.node.Node;
 import com.kandrac.matej.tree.AVLTree;
 import com.kandrac.matej.tree.BinaryTree;
@@ -32,12 +33,12 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        BinaryTree tree = new AVLTree();
+        AVLTree tree = new AVLTree();
 
         System.out.println("Type -1 to terminate creation");
         int value;
         while ((value = sc.nextInt()) != -1) {
-            tree.insert(new Node(value));
+            tree.insert(new AVLNode(value));
         }
         System.out.println("Search for: ");
         value = sc.nextInt();

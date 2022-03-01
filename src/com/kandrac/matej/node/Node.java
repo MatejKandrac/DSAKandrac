@@ -10,24 +10,18 @@ package com.kandrac.matej.node;
  * <h1>Basic Node class.</h1>
  * Contains basic values common for every type of Node.
  */
-public class Node {
+public abstract class Node {
 
     /**
      * Left and right nodes
      */
-    private Node left;
-    private Node right;
-
-    /**
-     * Height and balance factor. Values are calculated automatically when balancing
-     */
-    private int height = 0;
-    private int balanceFactor = 0;
+    protected Node left;
+    protected Node right;
 
     /**
      * Value node contains
      */
-    private final int value;
+    protected final int value;
 
     /**
      * Basic constructor
@@ -35,47 +29,6 @@ public class Node {
      */
     public Node(int value) {
         this.value = value;
-    }
-
-    /**
-     * Tree right rotation method.
-     * @return new root Node
-     */
-    public Node rotateRight() {
-        Node oldLeft = left;
-        left = oldLeft.right;
-        oldLeft.setRight(this);
-
-        update();
-        oldLeft.update();
-
-        return oldLeft;
-    }
-
-    /**
-     * Tree left rotation.
-     * @return new root Node
-     */
-    public Node rotateLeft() {
-        Node oldRight = right;
-        right = oldRight.left;
-        oldRight.setLeft(this);
-
-        update();
-        oldRight.update();
-
-        return oldRight;
-    }
-
-    /**
-     * Update method calculates height and balance factor of Node.
-     */
-    public void update() {
-        // Update values
-        int leftValue = left == null ? -1 : left.height;
-        int rightValue = right == null ? -1 : right.height;
-        height = 1 + Math.max(leftValue, rightValue);
-        balanceFactor = rightValue - leftValue;
     }
 
     public void setLeft(Node left) {
@@ -98,16 +51,4 @@ public class Node {
         return value;
     }
 
-    public int getBF() {
-        return balanceFactor;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "v=" + value +
-                " h=" + height +
-                " bf=" + balanceFactor +
-                '}';
-    }
 }

@@ -66,6 +66,14 @@ public class AVLNode extends Node {
         return balanceFactor;
     }
 
+    public AVLNode getLeft() {
+        return (AVLNode) left;
+    }
+
+    public AVLNode getRight() {
+        return (AVLNode) right;
+    }
+
     @Override
     public String toString() {
         return "Node{" +

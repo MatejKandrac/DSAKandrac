@@ -6,21 +6,25 @@
 // TODO
 package com.kandrac.matej.tree;
 
-import com.kandrac.matej.node.Node;
+import com.kandrac.matej.node.RedBlackNode;
 
-public class RedBlackTree extends BinaryTree {
+public class RedBlackTree extends BinaryTree<RedBlackNode> {
+
+
     @Override
-    protected Node insertRecursive(Node node, Node root) {
+    protected RedBlackNode insertRecursive(RedBlackNode node, RedBlackNode root) {
         return null;
     }
 
     @Override
-    Node balance(Node node) {
+    RedBlackNode balance(RedBlackNode node) {
         return null;
     }
 
     @Override
-    void delete(int value) {
-
+    protected RedBlackNode deleteRecursive(RedBlackNode root, int value) {
+        return null;
     }
+
+
 }

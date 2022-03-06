@@ -8,8 +8,10 @@ package com.kandrac.matej;
 
 import com.kandrac.matej.node.AVLNode;
 import com.kandrac.matej.node.Node;
+import com.kandrac.matej.node.RedBlackNode;
 import com.kandrac.matej.tree.AVLTree;
 import com.kandrac.matej.tree.BinaryTree;
+import com.kandrac.matej.tree.RedBlackTree;
 
 import java.util.Scanner;
 
@@ -32,17 +34,35 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        AVLTree tree = new AVLTree();
-
-        System.out.println("Type -1 to terminate creation");
         int value;
+
+        // Instances
+        AVLTree avlTree = new AVLTree();
+        RedBlackTree redBlackTree = new RedBlackTree();
+        // TODO HASH TABLE
+        // TODO HASH TABLE
+
+//        ///////////////////////// AVL TREE ///////////////////////////////
+//        System.out.println("Type -1 to terminate creation");
+//        while ((value = sc.nextInt()) != -1) {
+//            avlTree.insert(new AVLNode(value));
+//        }
+//        System.out.println("Search for: ");
+//        value = sc.nextInt();
+//        System.out.println("Found: " + avlTree.search(value));
+//        ///////////////////////////////////////////////////////////////////
+
+
+        ///////////////////////// RED BLACK TREE //////////////////////////
+        System.out.println("Type -1 to terminate creation");
         while ((value = sc.nextInt()) != -1) {
-            tree.insert(new AVLNode(value));
+            redBlackTree.insert(new RedBlackNode(value));
         }
         System.out.println("Search for: ");
         value = sc.nextInt();
-        System.out.println("Found: " + tree.search(value));
+        System.out.println("Found: " + redBlackTree.search(value));
+        ///////////////////////////////////////////////////////////////////
+
     }
 
 }

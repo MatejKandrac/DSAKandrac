@@ -41,7 +41,17 @@ public abstract class BinaryTree<T extends Node> {
      * Delete method different for each tree
      * @param value value of node to be deleted
      */
-    abstract void delete(int value);
+    public void delete(int value) {
+        root = deleteRecursive(root, value);
+    }
+
+    /**
+     * Delete recursive method
+     * @param root root node
+     * @param value value to delete
+     * @return new root node
+     */
+    protected abstract T deleteRecursive(T root, int value);
 
     /**
      * Public insert method. Launches recursive insertion if root is not null. See {@link #insertRecursive(T, T)}

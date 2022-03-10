@@ -29,21 +29,39 @@ public class AVLTree extends BinaryTree<AVLNode> {
 
     @Override
     AVLNode balance(AVLNode node) {
-        if (root.getBF() == -2) {
-            if (root.getLeft().getBF() > 0)
-                root.setLeft(root.getLeft().rotateLeft());
-            return root.rotateRight();
-        } else if (root.getBF() == 2) {
-            if (root.getRight().getBF() < 0)
-                root.setRight(root.getRight().rotateRight());
-            return root.rotateLeft();
+        if (node.getBF() == -2) {
+            if (node.getLeft().getBF() > 0)
+                node.setLeft(node.getLeft().rotateLeft());
+            return node.rotateRight();
+        } else if (node.getBF() == 2) {
+            if (node.getRight().getBF() < 0)
+                node.setRight(node.getRight().rotateRight());
+            return node.rotateLeft();
         }
-        return root;
+        return node;
     }
 
     @Override
     protected AVLNode deleteRecursive(AVLNode root, int value) {
-        return null;
+        if (root.getValue() == value) {
+            if (root.getRight() == null && root.getLeft() == null)
+                return null;
+            if (root.getRight() == null)
+                return root.getLeft();
+            if (root.getRight() != null) {
+                if (root.getLeft() == null)
+                    return root.getRight();
+                else
+                    return insertRecursive(root.getLeft(), root.getRight());
+            }
+            return root.getLeft();
+        }
+        if (value < root.getValue() && root.getLeft() != null)
+            root.setLeft(deleteRecursive(root.getLeft(), value));
+        else if (root.getRight() != null)
+                root.setRight(deleteRecursive(root.getRight(), value));
+        root.update();
+        return balance(root);
     }
 
 }

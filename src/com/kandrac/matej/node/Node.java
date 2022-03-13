@@ -51,4 +51,28 @@ public abstract class Node {
         return value;
     }
 
+    /**
+     * Tree right rotation method.
+     * @return new root Node
+     */
+    public Node rotateRight() {
+        Node oldLeft = left;
+        left = oldLeft.right;
+        oldLeft.setRight(this);
+
+        return oldLeft;
+    }
+
+    /**
+     * Tree left rotation.
+     * @return new root Node
+     */
+    public Node rotateLeft() {
+        Node oldRight = right;
+        right = oldRight.left;
+        oldRight.setLeft(this);
+
+        return oldRight;
+    }
+
 }

@@ -37,10 +37,7 @@ public class AVLNode extends Node {
      * @return new root Node
      */
     public AVLNode rotateRight() {
-        AVLNode oldLeft = (AVLNode) left;
-        left = oldLeft.right;
-        oldLeft.setRight(this);
-
+        AVLNode oldLeft = (AVLNode) super.rotateRight();
         update();
         oldLeft.update();
 
@@ -52,10 +49,7 @@ public class AVLNode extends Node {
      * @return new root Node
      */
     public AVLNode rotateLeft() {
-        AVLNode oldRight = (AVLNode) right;
-        right = oldRight.left;
-        oldRight.setLeft(this);
-
+        AVLNode oldRight = (AVLNode) super.rotateLeft();
         update();
         oldRight.update();
 

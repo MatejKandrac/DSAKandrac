@@ -58,10 +58,6 @@ public abstract class BinaryTree<T extends Node> {
      * @param node Node to be inserted
      */
     public void insert(T node) {
-        if (root == null) {
-            root = node;
-            return;
-        }
         root = insertRecursive(node, root);
     }
 

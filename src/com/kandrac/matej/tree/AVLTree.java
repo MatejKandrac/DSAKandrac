@@ -12,6 +12,10 @@ public class AVLTree extends BinaryTree<AVLNode> {
 
     @Override
     protected AVLNode insertRecursive(AVLNode node, AVLNode root) {
+        if (root == null) {
+            root = node;
+            return root;
+        }
         if (node.getValue() < root.getValue()) {
             if (root.getLeft() != null)
                 root.setLeft(insertRecursive(node, root.getLeft()));
@@ -23,12 +27,12 @@ public class AVLTree extends BinaryTree<AVLNode> {
             else
                 root.setRight(node);
         }
-        root.update();
         return balance(root);
     }
 
     @Override
     AVLNode balance(AVLNode node) {
+        node.update();
         if (node.getBF() == -2) {
             if (node.getLeft().getBF() > 0)
                 node.setLeft(node.getLeft().rotateLeft());
@@ -60,7 +64,6 @@ public class AVLTree extends BinaryTree<AVLNode> {
             root.setLeft(deleteRecursive(root.getLeft(), value));
         else if (root.getRight() != null)
                 root.setRight(deleteRecursive(root.getRight(), value));
-        root.update();
         return balance(root);
     }
 

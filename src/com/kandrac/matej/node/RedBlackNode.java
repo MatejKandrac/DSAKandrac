@@ -19,11 +19,6 @@ public class RedBlackNode extends Node{
     private int color = RED;
 
     /**
-     * Parent of node
-     */
-    private RedBlackNode parent;
-
-    /**
      * Basic constructor for RedBlack tree
      * @param value Value node contains
      */
@@ -51,20 +46,6 @@ public class RedBlackNode extends Node{
         return (RedBlackNode) super.rotateRight();
     }
 
-    public void setLeft(RedBlackNode left) {
-        super.setLeft(left);
-        left.parent = this;
-    }
-
-    public void setRight(RedBlackNode right) {
-        super.setRight(right);
-        right.parent = this;
-    }
-
-    public void setParent(RedBlackNode parent) {
-        this.parent = parent;
-    }
-
     public boolean isRightRed() {
         return right != null && getRight().getColor() == RED;
     }
@@ -83,10 +64,6 @@ public class RedBlackNode extends Node{
 
     public int getColor() {
         return color;
-    }
-
-    public RedBlackNode getParent() {
-        return parent;
     }
 
     public void setColor(int color) {

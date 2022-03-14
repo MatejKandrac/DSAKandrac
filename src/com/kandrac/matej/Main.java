@@ -8,9 +8,12 @@ package com.kandrac.matej;
 
 import com.kandrac.matej.node.AVLNode;
 import com.kandrac.matej.node.RedBlackNode;
+import com.kandrac.matej.node.TableNode;
+import com.kandrac.matej.table.ChainedHashTable;
 import com.kandrac.matej.tree.AVLTree;
 import com.kandrac.matej.tree.RedBlackTree;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -32,12 +35,12 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int value;
+        String value;
 
         // Instances
 //        AVLTree avlTree = new AVLTree();
-        RedBlackTree redBlackTree = new RedBlackTree();
-        // TODO HASH TABLE
+//        RedBlackTree redBlackTree = new RedBlackTree();
+        ChainedHashTable chainedHashTable = new ChainedHashTable();
         // TODO HASH TABLE
 
 //        ///////////////////////// AVL TREE ///////////////////////////////
@@ -56,15 +59,25 @@ public class Main {
 
 
         ///////////////////////// RED BLACK TREE //////////////////////////
-        System.out.println("Type -1 to terminate creation");
-        while ((value = sc.nextInt()) != -1) {
-            redBlackTree.insert(new RedBlackNode(value));
-        }
-        System.out.println("Search for: ");
-        value = sc.nextInt();
-        System.out.println("Found: " + redBlackTree.search(value));
+//        System.out.println("Type -1 to terminate creation");
+//        while ((value = sc.nextInt()) != -1) {
+//            redBlackTree.insert(new RedBlackNode(value));
+//        }
+//        System.out.println("Search for: ");
+//        value = sc.nextInt();
+//        System.out.println("Found: " + redBlackTree.search(value));
         ///////////////////////////////////////////////////////////////////
 
+
+        ///////////////////////// CHAINED HASH TABLE ///////////////////////
+        System.out.println("Type -1 to terminate creation");
+        while ((value = sc.nextLine()) != null) {
+            chainedHashTable.insert(new TableNode(value));
+        }
+//        System.out.println("Search for: ");
+//        value = sc.nextInt();
+//        System.out.println("Found: " + chainedHashTable.search(value));
+        ////////////////////////////////////////////////////////////////////
     }
 
 }

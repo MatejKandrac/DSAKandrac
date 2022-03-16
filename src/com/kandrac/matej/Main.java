@@ -7,13 +7,14 @@
 package com.kandrac.matej;
 
 import com.kandrac.matej.node.AVLNode;
+import com.kandrac.matej.node.Node;
 import com.kandrac.matej.node.RedBlackNode;
 import com.kandrac.matej.node.TableNode;
 import com.kandrac.matej.table.ChainedHashTable;
+import com.kandrac.matej.table.RehashingHashTable;
 import com.kandrac.matej.tree.AVLTree;
 import com.kandrac.matej.tree.RedBlackTree;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -24,6 +25,8 @@ import java.util.Scanner;
  */
 
 public class Main {
+
+    private static int SIZE = 100_000;
 
     /**
      * Method main creates an instance of {@link Scanner} to allow user input.
@@ -36,44 +39,70 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String value;
+        CommonOperations[] trees = {
+                new AVLTree(),
+                new RedBlackTree()
+        };
+        CommonOperations[] tables = {
+                new ChainedHashTable(),
+                new RehashingHashTable()
+        };
+        long timeTracker = 0;
 
-        // Instances
-//        AVLTree avlTree = new AVLTree();
-//        RedBlackTree redBlackTree = new RedBlackTree();
-        ChainedHashTable chainedHashTable = new ChainedHashTable();
-        // TODO HASH TABLE
+        ///////////////////////// TREES ///////////////////////////////////
 
-//        ///////////////////////// AVL TREE ///////////////////////////////
-//        System.out.println("Type -1 to terminate creation");
-//        while ((value = sc.nextInt()) != -1) {
-//            avlTree.insert(new AVLNode(value));
-//        }
-//        System.out.println("Search for: ");
-//        value = sc.nextInt();
-//        System.out.println("Found: " + avlTree.search(value));
-//        System.out.println("Delete: ");
-//        value = sc.nextInt();
-//        avlTree.delete(value);
+        ///////////////////////// AVL TREE ////////////////////////////////
+        System.out.print("Starting AVL Insertion    ");
+        timeTracker = System.currentTimeMillis();
+        for (int i = 0; i < SIZE; i++) {
+            trees[0].insert(new AVLNode(i));
+        }
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Insertion completed in " + timeTracker +"ms");
 
-//        ///////////////////////////////////////////////////////////////////
+        System.out.println("Starting AVL search     ");
+        timeTracker = System.currentTimeMillis();
+        Node node = trees[0].search(new AVLNode(0));
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Search completed in " + timeTracker + "ms, node: " + node);
 
+        System.out.println("Starting AVL delete     ");
+        timeTracker = System.currentTimeMillis();
+        trees[0].delete(new AVLNode(SIZE / 2));
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Delete completed in " + timeTracker + "ms");
 
         ///////////////////////// RED BLACK TREE //////////////////////////
-//        System.out.println("Type -1 to terminate creation");
-//        while ((value = sc.nextInt()) != -1) {
-//            redBlackTree.insert(new RedBlackNode(value));
-//        }
-//        System.out.println("Search for: ");
-//        value = sc.nextInt();
-//        System.out.println("Found: " + redBlackTree.search(value));
-        ///////////////////////////////////////////////////////////////////
+        System.out.println("\n\n");
+
+        System.out.print("Starting RED BLACK Insertion    ");
+        timeTracker = System.currentTimeMillis();
+        for (int i = 0; i < SIZE; i++) {
+            trees[1].insert(new RedBlackNode(i));
+        }
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Insertion completed in " + timeTracker +"ms");
+
+        System.out.println("Starting RED BLACK search     ");
+        timeTracker = System.currentTimeMillis();
+        node = trees[1].search(new RedBlackNode(0));
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Search completed in " + timeTracker + "ms, node: " + node);
+
+//        System.out.println("Starting RED BLACK delete     ");
+//        timeTracker = System.currentTimeMillis();
+//        trees[0].delete(new RedBlackNode(10_000));
+//        timeTracker = System.currentTimeMillis() - timeTracker;
+//        System.out.println("Delete completed in " + timeTracker + "ms");
+
+        ////////////////////////// TABLES ///////////////////////////////////
 
 
         ///////////////////////// CHAINED HASH TABLE ///////////////////////
-        System.out.println("Type -1 to terminate creation");
-        while ((value = sc.nextLine()) != null) {
-            chainedHashTable.insert(new TableNode(value));
-        }
+//        System.out.println("Type -1 to terminate creation");
+//        while ((value = sc.nextLine()) != null) {
+//            chainedHashTable.insert(new TableNode(value));
+//        }
 //        System.out.println("Search for: ");
 //        value = sc.nextInt();
 //        System.out.println("Found: " + chainedHashTable.search(value));

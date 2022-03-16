@@ -83,7 +83,6 @@ public abstract class BinaryTree<T extends TreeNode> implements CommonOperations
      * @return Null if not found, instance if found
      */
     private TreeNode searchRecursive(TreeNode node, int value) {
-        System.out.println("Searching " + node.toString());
         if (node.getValue() == value)
             return node;
         else if (node.getValue() > value) {

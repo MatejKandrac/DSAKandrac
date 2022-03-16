@@ -35,8 +35,8 @@ public class RedBlackTree extends BinaryTree<RedBlackNode> {
         if (violation) {
             violation = false;
             RedBlackNode newRoot = balance(root);
-            if (this.root == root)
-                root.setColor(BLACK);
+            if (this.root == newRoot)
+                newRoot.setColor(BLACK);
             return newRoot;
         }
         if (root.getColor() == RED && root.hasRed())

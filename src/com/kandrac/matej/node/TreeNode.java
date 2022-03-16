@@ -5,13 +5,11 @@
 
 package com.kandrac.matej.node;
 
-import com.kandrac.matej.node.Node;
-
 /**
  * <h1>Basic TreeNode class.</h1>
  * Contains basic values common for every type of TreeNode.
  */
-public abstract class TreeNode extends Node {
+public class TreeNode extends Node {
 
     /**
      * Left and right nodes

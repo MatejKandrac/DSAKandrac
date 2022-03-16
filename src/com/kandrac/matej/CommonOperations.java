@@ -9,8 +9,8 @@ import com.kandrac.matej.node.Node;
 
 public interface CommonOperations {
 
-    public Node search(Node node);
-    public void delete(Node node);
-    public void insert(Node node);
+    Node search(Node node);
+    void delete(Node node);
+    void insert(Node node);
 
 }

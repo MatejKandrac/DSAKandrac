@@ -14,12 +14,29 @@ public class ChainedHashTable extends HashTable<LinkedList<TableNode>> {
 
     @Override
     public Node search(Node node) {
+        TableNode tableNode = (TableNode) node;
+        LinkedList<TableNode> chain = table[getHashedIndex(tableNode)];
+        for (TableNode chainNode : chain) {
+            if (chainNode.getKey().equals(tableNode.getKey()))
+                return chainNode;
+        }
         return null;
     }
 
     @Override
     public void delete(Node node) {
-
+        TableNode tableNode = (TableNode) node;
+        int hashKey = getHashedIndex(tableNode);
+        LinkedList<TableNode> chain = table[hashKey];
+        for (int i = 0; i < chain.size(); i++) {
+            if (chain.get(i).getKey().equals(tableNode.getKey())) {
+                chain.remove(i);
+                nodesInserted--;
+                break;
+            }
+        }
+        if (chain.size() == 0)
+            table[hashKey] = null;
     }
 
     @Override

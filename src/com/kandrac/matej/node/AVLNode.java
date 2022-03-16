@@ -5,7 +5,8 @@
 
 package com.kandrac.matej.node;
 
-public class AVLNode extends Node {
+
+public class AVLNode extends TreeNode {
 
     /**
      * Height and balance factor. Values are calculated automatically when balancing

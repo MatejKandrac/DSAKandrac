@@ -6,7 +6,9 @@
 
 package com.kandrac.matej.tree;
 
+import com.kandrac.matej.CommonOperations;
 import com.kandrac.matej.node.Node;
+import com.kandrac.matej.node.TreeNode;
 
 /**
  * <h1>Abstract class {@link BinaryTree} contains all common methods and variables for other trees.</h1>
@@ -14,7 +16,7 @@ import com.kandrac.matej.node.Node;
  * See also {@link AVLTree} {@link RedBlackTree}
  */
 
-public abstract class BinaryTree<T extends Node> {
+public abstract class BinaryTree<T extends TreeNode> implements CommonOperations {
 
     /**
      * Root of the tree
@@ -23,8 +25,8 @@ public abstract class BinaryTree<T extends Node> {
 
     /**
      * Recursive method for inserting. Method is different for various types of trees.
-     * Don't use this method from outside class. Use {@link #insert(T)} instead.
-     * @param node Node to be inserted (value is always same)
+     * Don't use this method from outside class. Use {@link #insert(Node)} instead.
+     * @param node TreeNode to be inserted (value is always same)
      * @param root Root node (value changes depending on height)
      * @return new root node
      */
@@ -39,10 +41,11 @@ public abstract class BinaryTree<T extends Node> {
 
     /**
      * Delete method different for each tree
-     * @param value value of node to be deleted
+     * @param node value of node to be deleted
      */
-    public void delete(int value) {
-        root = deleteRecursive(root, value);
+    @Override
+    public void delete(Node node) {
+        root = deleteRecursive(root, node.getValue());
     }
 
     /**
@@ -55,19 +58,22 @@ public abstract class BinaryTree<T extends Node> {
 
     /**
      * Public insert method. Launches recursive insertion if root is not null. See {@link #insertRecursive(T, T)}
-     * @param node Node to be inserted
+     * @param node TreeNode to be inserted
      */
-    public void insert(T node) {
-        root = insertRecursive(node, root);
+
+    @Override
+    public void insert(Node node) {
+        root = insertRecursive((T) node, root);
     }
 
     /**
-     * Public search method. Launches recursive searching. {@link #searchRecursive(Node, int)}
-     * @param value value to search for
+     * Public search method. Launches recursive searching. {@link #searchRecursive(TreeNode, int)}
+     * @param node value to search for
      * @return null if not found, instance if found
      */
-    public Node search(int value) {
-        return searchRecursive(root, value);
+    @Override
+    public Node search(Node node) {
+        return searchRecursive(root, node.getValue());
     }
 
     /**
@@ -76,7 +82,7 @@ public abstract class BinaryTree<T extends Node> {
      * @param value value to search for
      * @return Null if not found, instance if found
      */
-    private Node searchRecursive(Node node, int value) {
+    private TreeNode searchRecursive(TreeNode node, int value) {
         System.out.println("Searching " + node.toString());
         if (node.getValue() == value)
             return node;

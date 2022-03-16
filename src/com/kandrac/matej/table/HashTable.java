@@ -5,24 +5,15 @@
 
 package com.kandrac.matej.table;
 
+import com.kandrac.matej.CommonOperations;
 import com.kandrac.matej.node.TableNode;
 
-public abstract class HashTable<V> {
+public abstract class HashTable<V> implements CommonOperations {
 
     protected V[] table;
     protected int tableSize = 0;
     protected int nodesInserted = 0;
     protected boolean expanding = false;
-
-    abstract public void insert(TableNode node);
-
-    public void search() {
-        
-    }
-
-    public void delete() {
-        
-    }
 
     abstract void handleCollision(int index, TableNode node);
 

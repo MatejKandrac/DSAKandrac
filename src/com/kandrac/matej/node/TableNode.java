@@ -5,14 +5,13 @@
 
 package com.kandrac.matej.node;
 
-public class TableNode {
+public class TableNode extends Node {
 
-    private int value;
     private String key;
 
     public TableNode(String key) {
+        super(0);
         this.key = key;
-        this.value = hashCode();
     }
 
     @Override

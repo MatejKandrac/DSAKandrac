@@ -5,7 +5,7 @@
 
 package com.kandrac.matej.node;
 
-public class RedBlackNode extends Node{
+public class RedBlackNode extends TreeNode {
 
     /**
      * Constants for colors

@@ -16,6 +16,8 @@ public class ChainedHashTable extends HashTable<LinkedList<TableNode>> {
     public Node search(Node node) {
         TableNode tableNode = (TableNode) node;
         LinkedList<TableNode> chain = table[getHashedIndex(tableNode)];
+        if (chain == null)
+            return null;
         for (TableNode chainNode : chain) {
             if (chainNode.getKey().equals(tableNode.getKey()))
                 return chainNode;
@@ -64,10 +66,12 @@ public class ChainedHashTable extends HashTable<LinkedList<TableNode>> {
         nodesInserted++;
     }
 
+    @Override
     void expandAndRehash() {
         expanding = true;
-        int newTableSize = tableSize * 2;
+        int newTableSize = tableSize * 3;
         LinkedList<TableNode>[] temp = table;
+        tableSize = newTableSize;
         table = new LinkedList[newTableSize];
         nodesInserted = 0;
         for (LinkedList<TableNode> tableNodes : temp) {
@@ -77,7 +81,6 @@ public class ChainedHashTable extends HashTable<LinkedList<TableNode>> {
                 }
             }
         }
-        tableSize = newTableSize;
         expanding = false;
     }
 

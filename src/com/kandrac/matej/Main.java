@@ -11,7 +11,7 @@ import com.kandrac.matej.node.Node;
 import com.kandrac.matej.node.RedBlackNode;
 import com.kandrac.matej.node.TableNode;
 import com.kandrac.matej.table.ChainedHashTable;
-import com.kandrac.matej.table.RehashingHashTable;
+import com.kandrac.matej.table.OpenAddressingHashTable;
 import com.kandrac.matej.tree.AVLTree;
 import com.kandrac.matej.tree.RedBlackTree;
 
@@ -26,7 +26,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static int SIZE = 100_000;
+    private static int SIZE = 1_000_000;
 
     /**
      * Method main creates an instance of {@link Scanner} to allow user input.
@@ -45,7 +45,7 @@ public class Main {
         };
         CommonOperations[] tables = {
                 new ChainedHashTable(),
-                new RehashingHashTable()
+                new OpenAddressingHashTable()
         };
         long timeTracker = 0;
 
@@ -99,13 +99,17 @@ public class Main {
 
 
         ///////////////////////// CHAINED HASH TABLE ///////////////////////
-//        System.out.println("Type -1 to terminate creation");
-//        while ((value = sc.nextLine()) != null) {
-//            chainedHashTable.insert(new TableNode(value));
-//        }
-//        System.out.println("Search for: ");
-//        value = sc.nextInt();
-//        System.out.println("Found: " + chainedHashTable.search(value));
+        System.out.println("Type -1 to terminate creation");
+        while (!(value = sc.nextLine()).isEmpty()) {
+            tables[0].insert(new TableNode(value));
+        }
+        System.out.println("Search for: ");
+        value = sc.nextLine();
+        System.out.println("Found: " + tables[0].search(new TableNode(value)));
+        System.out.println("Delete: ");
+        value = sc.nextLine();
+        tables[0].delete(new TableNode(value));
+        System.out.println("Deleted");
         ////////////////////////////////////////////////////////////////////
     }
 

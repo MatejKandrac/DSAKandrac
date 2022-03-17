@@ -15,6 +15,8 @@ public abstract class HashTable<V> implements CommonOperations {
     protected int nodesInserted = 0;
     protected boolean expanding = false;
 
+    abstract void expandAndRehash();
+
     abstract void handleCollision(int index, TableNode node);
 
     protected int getHashedIndex(TableNode node) {

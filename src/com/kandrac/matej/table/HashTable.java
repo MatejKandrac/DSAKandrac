@@ -27,4 +27,19 @@ public abstract class HashTable<V> implements CommonOperations {
         return sum % (tableSize == 0 ? 1 : tableSize);
     }
 
+    protected int closestPrime(int start) {
+        int closest = start;
+        while (!isPrime(closest))
+            closest++;
+        return closest;
+    }
+
+    protected boolean isPrime(int num) {
+        for (int i = 2; i <= num / 2; ++i) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

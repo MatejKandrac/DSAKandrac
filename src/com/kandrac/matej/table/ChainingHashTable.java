@@ -10,7 +10,7 @@ import com.kandrac.matej.node.TableNode;
 
 import java.util.LinkedList;
 
-public class ChainedHashTable extends HashTable<LinkedList<TableNode>> {
+public class ChainingHashTable extends HashTable<LinkedList<TableNode>> {
 
     @Override
     public Node search(Node node) {
@@ -30,13 +30,10 @@ public class ChainedHashTable extends HashTable<LinkedList<TableNode>> {
         TableNode tableNode = (TableNode) node;
         int hashKey = getHashedIndex(tableNode);
         LinkedList<TableNode> chain = table[hashKey];
-        for (int i = 0; i < chain.size(); i++) {
-            if (chain.get(i).getKey().equals(tableNode.getKey())) {
-                chain.remove(i);
-                nodesInserted--;
-                break;
-            }
-        }
+        int originalSize = chain.size();
+        chain.removeIf(tableNode1 -> tableNode1.getKey().equals(tableNode.getKey()));
+        if (originalSize < chain.size())
+            nodesInserted--;
         if (chain.size() == 0)
             table[hashKey] = null;
     }
@@ -69,7 +66,7 @@ public class ChainedHashTable extends HashTable<LinkedList<TableNode>> {
     @Override
     void expandAndRehash() {
         expanding = true;
-        int newTableSize = tableSize * 3;
+        int newTableSize = closestPrime(tableSize * 4);
         LinkedList<TableNode>[] temp = table;
         tableSize = newTableSize;
         table = new LinkedList[newTableSize];

@@ -13,12 +13,12 @@ public class OpenAddressingHashTable extends HashTable<TableNode> {
     @Override
     void handleCollision(int index, TableNode node) {
         while (true) {
+            if (index == tableSize -1)
+                index = 0;
             if (table[++index] == null) {
                 table[index] = node;
                 break;
             }
-            if (index == tableSize -1)
-                index = 0;
         }
     }
 
@@ -28,10 +28,12 @@ public class OpenAddressingHashTable extends HashTable<TableNode> {
         int hashIndex = getHashedIndex(tableNode);
         int startIndex = hashIndex;
         do {
-            if (tableNode.getKey().equals(table[hashIndex++].getKey()))
-                return table[--hashIndex];
             if (hashIndex == tableSize -1)
                 hashIndex = 0;
+            if (tableNode.getKey().equals(table[hashIndex++].getKey()))
+                return table[--hashIndex];
+            if (table[hashIndex] == null)
+                return null;
         } while (startIndex != hashIndex);
         return null;
     }
@@ -42,14 +44,14 @@ public class OpenAddressingHashTable extends HashTable<TableNode> {
         int hashIndex = getHashedIndex(tableNode);
         int startIndex = hashIndex;
         while (true) {
+            if (hashIndex == tableSize -1)
+                hashIndex = 0;
             if (tableNode.getKey().equals(table[hashIndex++].getKey())) {
                 table[--hashIndex].setKey(null);
                 break;
             }
-            if (startIndex == hashIndex)
+            if (startIndex == hashIndex || table[hashIndex] == null)
                 break;
-            if (hashIndex == tableSize -1)
-                hashIndex = 0;
         }
     }
 
@@ -76,7 +78,7 @@ public class OpenAddressingHashTable extends HashTable<TableNode> {
     @Override
     void expandAndRehash() {
         expanding = true;
-        int newTableSize = tableSize * 3;
+        int newTableSize = closestPrime(tableSize * 4);
         TableNode[] temp = table;
         tableSize = newTableSize;
         table = new TableNode[newTableSize];

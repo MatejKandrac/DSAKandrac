@@ -15,7 +15,7 @@ public abstract class Node {
     /**
      * Value node contains
      */
-    protected final int value;
+    protected int value;
 
     /**
      * Basic constructor
@@ -27,5 +27,9 @@ public abstract class Node {
 
     public int getValue() {
         return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

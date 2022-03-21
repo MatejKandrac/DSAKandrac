@@ -7,6 +7,7 @@
 package com.kandrac.matej.tree;
 
 import com.kandrac.matej.node.AVLNode;
+import com.kandrac.matej.node.TreeNode;
 
 public class AVLTree extends BinaryTree<AVLNode> {
 
@@ -55,8 +56,11 @@ public class AVLTree extends BinaryTree<AVLNode> {
             if (root.getRight() != null) {
                 if (root.getLeft() == null)
                     return root.getRight();
-                else
-                    return insertRecursive(root.getLeft(), root.getRight());
+                else {
+                    AVLNode inorderSuccessor = (AVLNode) getSuccessor(root);
+                    root.setValue(inorderSuccessor.getValue());
+                    root.setRight(deleteRecursive(root.getRight(), inorderSuccessor.getValue()));
+                }
             }
             return root.getLeft();
         }
@@ -66,5 +70,4 @@ public class AVLTree extends BinaryTree<AVLNode> {
                 root.setRight(deleteRecursive(root.getRight(), value));
         return balance(root);
     }
-
 }

@@ -97,4 +97,11 @@ public abstract class BinaryTree<T extends TreeNode> implements CommonOperations
         }
     }
 
+    protected TreeNode getSuccessor(TreeNode node) {
+        TreeNode current = node.getRight();
+        while (current.getLeft() != null)
+            current = node.getLeft();
+        return current;
+    }
+
 }

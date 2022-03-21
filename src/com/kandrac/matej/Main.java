@@ -6,6 +6,8 @@
 
 package com.kandrac.matej;
 
+import com.kandrac.matej.node.AVLNode;
+import com.kandrac.matej.node.RedBlackNode;
 import com.kandrac.matej.node.TableNode;
 import com.kandrac.matej.table.ChainingHashTable;
 import com.kandrac.matej.table.OpenAddressingHashTable;
@@ -24,8 +26,8 @@ import java.util.UUID;
 
 public class Main {
 
-    private static final int SIZE = 500000;
-    private static final int RANDOM_INDEXES_SIZE = 100000;
+    private static final int SIZE = 100000;
+    private static final int RANDOM_INDEXES_SIZE = 10000;
 
     /**
      * It creates instances of {@link AVLTree} on which operations will be performed.
@@ -55,42 +57,42 @@ public class Main {
         ///////////////////////// TREES ///////////////////////////////////
 
 //        ///////////////////////// AVL TREE ////////////////////////////////
-//        System.out.print("Starting AVL Insertion    ");
-//        timeTracker = System.currentTimeMillis();
-//        for (int i = 0; i < SIZE; i++)
-//            trees[0].insert(new AVLNode(i));
-//
-//        timeTracker = System.currentTimeMillis() - timeTracker;
-//        System.out.println("Insertion completed in " + timeTracker +"ms");
-//
-//        System.out.println("Starting AVL search");
-//        timeTracker = System.currentTimeMillis();
-//        for (int i = 0; i < RANDOM_INDEXES_SIZE; i++)
-//            trees[0].search(new AVLNode(i));
-//        timeTracker = System.currentTimeMillis() - timeTracker;
-//        System.out.println("Search completed in " + timeTracker + "ms");
-//
-//        System.out.println("Starting AVL delete");
-//        timeTracker = System.currentTimeMillis();
-//        for (int i = 0; i < RANDOM_INDEXES_SIZE; i++)
-//            trees[0].delete(new AVLNode(i));
-//        timeTracker = System.currentTimeMillis() - timeTracker;
-//        System.out.println("Delete completed in " + timeTracker + "ms");
-//        System.out.println("\n\n");
-//        ///////////////////////// RED BLACK TREE //////////////////////////
-//        System.out.print("Starting RED BLACK Insertion");
-//        timeTracker = System.currentTimeMillis();
-//        for (int i = 0; i < SIZE; i++)
-//            trees[1].insert(new RedBlackNode(i));
-//        timeTracker = System.currentTimeMillis() - timeTracker;
-//        System.out.println("Insertion completed in " + timeTracker +"ms");
-//
-//        System.out.println("Starting RED BLACK search");
-//        timeTracker = System.currentTimeMillis();
-//        for (int i = 0; i < RANDOM_INDEXES_SIZE; i++)
-//            trees[1].search(new RedBlackNode(i));
-//        timeTracker = System.currentTimeMillis() - timeTracker;
-//        System.out.println("Search completed in " + timeTracker + "ms");
+        System.out.print("Starting AVL Insertion    ");
+        timeTracker = System.currentTimeMillis();
+        for (int i = 0; i < SIZE; i++)
+            trees[0].insert(new AVLNode(i));
+
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Insertion completed in " + timeTracker +"ms");
+
+        System.out.println("Starting AVL search");
+        timeTracker = System.currentTimeMillis();
+        for (int i = 0; i < RANDOM_INDEXES_SIZE; i++)
+            trees[0].search(new AVLNode(randomIndexes[i]));
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Search completed in " + timeTracker + "ms");
+
+        System.out.println("Starting AVL delete");
+        timeTracker = System.currentTimeMillis();
+        for (int i = 0; i < RANDOM_INDEXES_SIZE; i++)
+            trees[0].delete(new AVLNode(i));
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Delete completed in " + timeTracker + "ms");
+        System.out.println("\n\n");
+        ///////////////////////// RED BLACK TREE //////////////////////////
+        System.out.print("Starting RED BLACK Insertion");
+        timeTracker = System.currentTimeMillis();
+        for (int i = 0; i < SIZE; i++)
+            trees[1].insert(new RedBlackNode(i));
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Insertion completed in " + timeTracker +"ms");
+
+        System.out.println("Starting RED BLACK search");
+        timeTracker = System.currentTimeMillis();
+        for (int i = 0; i < RANDOM_INDEXES_SIZE; i++)
+            trees[1].search(new RedBlackNode(randomIndexes[i]));
+        timeTracker = System.currentTimeMillis() - timeTracker;
+        System.out.println("Search completed in " + timeTracker + "ms");
 
 //        System.out.println("Starting RED BLACK delete     ");
 //        timeTracker = System.currentTimeMillis();
@@ -108,6 +110,7 @@ public class Main {
         System.out.println("\n\n");
         System.out.println("Starting Linear Probing");
         compareTable(tables[0], inserts, randomIndexes);
+
         System.out.println("\n\n");
         System.out.println("Starting Open Addressing");
         compareTable(tables[1], inserts, randomIndexes);

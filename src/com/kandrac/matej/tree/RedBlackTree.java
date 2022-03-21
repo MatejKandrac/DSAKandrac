@@ -13,6 +13,7 @@ import static com.kandrac.matej.node.RedBlackNode.RED;
 public class RedBlackTree extends BinaryTree<RedBlackNode> {
 
     private boolean violation = false;
+    private RedBlackNode deleteParent = null;
 
     @Override
     protected RedBlackNode insertRecursive(RedBlackNode node, RedBlackNode root) {
@@ -71,38 +72,46 @@ public class RedBlackTree extends BinaryTree<RedBlackNode> {
 
     @Override
     protected RedBlackNode deleteRecursive(RedBlackNode root, int value) {
-//        if (root.getValue() == value) {
-//            RedBlackNode successor;
-//            if (root.getRight() == null && root.getLeft() == null)
-//                successor = null;
-//            else if (root.getRight() == null)
-//                successor = root.getLeft();
-//            else if (root.getLeft() == null)
-//                successor = root.getRight();
-//            else
-//                successor = (RedBlackNode) getSuccessor(root);
-//            boolean bothBlack = root.getColor() == BLACK && (successor == null || successor.getColor() == BLACK);
-//            if (successor == null) {
-//                if (root == this.root)
-//                    this.root = null;
-//                else {
-//                    if (bothBlack) {
-//
-//                    }
-//                    else {
-//                        if (successorParent.getRight() != null)
-//                            successor.getRight().setColor(RED);
-//                    }
-//                }
-//            }
-//            root.setValue(successor.getValue());
-//            root.setRight(deleteRecursive(root.getRight(), successor.getValue()));
-//            return root.getLeft();
-//        }
-//        if (value < root.getValue() && root.getLeft() != null)
-//            root.setLeft(deleteRecursive(root.getLeft(), value));
-//        else if (root.getRight() != null)
-//            root.setRight(deleteRecursive(root.getRight(), value));
+        if (root.getValue() == value) {
+            RedBlackNode successor;
+            if (root.getRight() == null && root.getLeft() == null)
+                successor = null;
+            else if (root.getRight() == null)
+                successor = root.getLeft();
+            else if (root.getLeft() == null)
+                successor = root.getRight();
+            else
+                successor = (RedBlackNode) getSuccessor(root);
+            boolean bothBlack = root.getColor() == BLACK && (successor == null || successor.getColor() == BLACK);
+
+            if (successor == null) {
+                if (root == this.root)
+                    this.root = null;
+                else {
+                    if (bothBlack) {
+                        //TODO
+                    }
+                    else {
+                        if (deleteParent.getLeft() == root && deleteParent.getRight() != null)
+                            successor.getRight().setColor(RED);
+                        else if (deleteParent.getRight() == root && deleteParent.getLeft() != null)
+                            successor.getLeft().setColor(RED);
+                    }
+                }
+                return null;
+            }
+
+
+
+        }
+
+        deleteParent = root;
+        if (value < root.getValue() && root.getLeft() != null)
+            root.setLeft(deleteRecursive(root.getLeft(), value));
+        else if (root.getRight() != null)
+            root.setRight(deleteRecursive(root.getRight(), value));
+        if (this.root == root)
+            deleteParent = null;
         return null;
     }
 
